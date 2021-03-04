@@ -3,9 +3,9 @@ import React,{useState, useEffect} from 'react'
 
 
 const Search =()=> {
-const [term, setTerm]=useState('');
+const [term, setTerm]=useState('Programming');
 const [results, setResults]=useState([]);
-console.log(results)
+console.log(results);
 console.log('I RUN WITH EVERY RENDER');
 useEffect(() => {
    
@@ -19,13 +19,40 @@ const {data}=await axios.get('https://en.wikipedia.org/w/api.php', {
         srsearch: term,
     },
 });
-setResults(data);
+setResults(data.query.search);
 };
+const timeOutId=setTimeout(()=> {   
+if (term){
 Search();
-},[term])
+}
+}, 1000);
+},[term]);
+
+const renderedResults = results.map((result) => {
+    return(
+    <div key={result.pageid }className="item">
+        <div className="right floated content">
+            <a 
+            href={`https://en.wikipedia?curid=${result.pageid}`}
+            className="ui button "
+            >
+                Go
+            </a>
+
+        </div>
+        <div className="content">
+            <div className="header">
+                {result.title}
+            </div>
+            <span dangerouslySetInnerHTML={{__html:result.snippet}}></span>
+    
+        </div>
+    </div>
+    );
+}) ;
     return (
         <div>
-            <form className="ui form">
+            <div className="ui form">
                 <div className="field">
                     <label>Seach</label>
                     <input 
@@ -36,9 +63,13 @@ Search();
                 </div>
                 
 
-            </form>
+            </div>
+            <div className="ui celled list">   
+            {renderedResults}
         </div>
+        </div>
+
     )
 }
 
-export default Search
+export default Search;
