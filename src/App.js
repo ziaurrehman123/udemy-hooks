@@ -39,8 +39,8 @@ const options=[
 //     const [selected, setSelected] = useState(options[0]);
 //     return (
 //         <div className="ui container">
-//             {/* <Accordion items={items} />
-//             <Search /> */}
+//             <Accordion items={items} />
+//             <Search />
 //             <Dropdown 
 //             options ={options}
 //             selected={selected}

@@ -1,6 +1,6 @@
 import React, {useState}    from 'react'
 
-const Dropdown =({options, selected, onSelectedChange})=> {
+const Dropdown =({label, options, selected, onSelectedChange})=> {
     const [open, setOpen]=useState(false);
 const renderedOptions=options.map((option)=>{
     if (option.value===selected.value){
@@ -19,7 +19,7 @@ const renderedOptions=options.map((option)=>{
     return (
         <div className="ui form">
             <div className="field">
-                <div className="label"> Select here.... </div>
+                <div className="label"> {label} </div>
                 <div onClick={()=>setOpen(!open)}  className={`ui selection dropdown ${open ? 'visible active':''}`}>
                     <i className="dropdown icon"></i>
                     <div className="text">{selected.label}</div>
